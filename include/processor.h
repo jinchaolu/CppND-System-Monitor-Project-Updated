@@ -9,13 +9,13 @@ using std::vector;
 
 class Processor {
  public:
-  float Utilization();  // TODO: See src/processor.cpp
+  float Utilization();  // (Done)TODO: See src/processor.cpp
 
   // (Done)TODO: Declare any necessary private members
  private:
   vector<string> cpuTime_;
-  long prevActiveTime{0};
-  long prevIdleTime{0};
+  long prevActiveTime_{0};
+  long prevIdleTime_{0};
 };
 
 #endif

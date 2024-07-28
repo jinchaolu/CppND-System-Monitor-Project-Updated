@@ -16,13 +16,13 @@ float Processor::Utilization() {
   
   // Calculate the utilization between previous and current time
   float ans = 0.0;
-  long activeTime = currActiveTime - this -> prevActiveTime;
-  long idleTime = currIdleTime - this -> prevIdleTime;
+  long activeTime = currActiveTime - (this -> prevActiveTime_);
+  long idleTime = currIdleTime - (this -> prevIdleTime_);
   long totalTime = activeTime + idleTime;
   ans = float(activeTime) / float(totalTime);
   
   // Save the active time and idle time
-  this -> prevActiveTime = currActiveTime;
-  this -> prevIdleTime = currIdleTime;
+  this -> prevActiveTime_ = currActiveTime;
+  this -> prevIdleTime_ = currIdleTime;
   return ans;
 }
