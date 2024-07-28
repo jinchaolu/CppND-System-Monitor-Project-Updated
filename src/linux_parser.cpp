@@ -115,21 +115,58 @@ long LinuxParser::UpTime() {
   return long(fUpTime);
 }
 
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
+// (Done)TODO: Read and return the number of jiffies for the system
+long LinuxParser::Jiffies(vector<string> cpuTime) {
+  return (LinuxParser::ActiveJiffies(cpuTime) + LinuxParser::IdleJiffies(cpuTime));
+}
 
 // TODO: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
+// (Done)TODO: Read and return the number of active jiffies for the system
+long LinuxParser::ActiveJiffies(vector<string> cpuTime) {
+  return (
+    std::stol(cpuTime[CPUStates::kUser_]) + std::stol(cpuTime[CPUStates::kNice_])
+    + std::stol(cpuTime[CPUStates::kSystem_]) + std::stol(cpuTime[CPUStates::kIRQ_])
+    + std::stol(cpuTime[CPUStates::kSoftIRQ_]) + std::stol(cpuTime[CPUStates::kSteal_])
+    + std::stol(cpuTime[CPUStates::kGuest_]) + std::stol(cpuTime[CPUStates::kGuestNice_])
+         );
+}
 
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+// (Done)TODO: Read and return the number of idle jiffies for the system
+long LinuxParser::IdleJiffies(vector<string> cpuTime) {
+  return (std::stol(cpuTime[CPUStates::kIdle_]) + std::stol(cpuTime[CPUStates::kIOwait_]));
+}
 
-// TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+// (Done)TODO: Read and return CPU utilization
+// Even once you know what each of these numbers represents, it's
+// still a challenge to determine exactly how to use these figures
+// to calculate processor utilization. This guide(https://github.com/Leo-G/Data-Science-Wiki)
+// and this StackOverflow post(https://stackoverflow.com/questions/23367857/accurate-calculation-of-cpu-usage-given-in-percentage-in-linux) are helpful.
+// Example:
+//   cpu  802329 6142 358209 30954390 309714 0 30751 0 0 0
+vector<string> LinuxParser::CpuUtilization() {
+  string line;
+  string key;
+  string value;
+  vector<string> ans;
+  std::ifstream stream(kProcDirectory + kStatFilename);
+  if (stream.is_open()) {
+    while (std::getline(stream, line)) {
+      std::istringstream linestream(line);
+      linestream >> key;
+      if (key == "cpu") {
+//         std::cout << key << std::endl;
+        while (linestream >> value) {
+//           std::cout << value << std::endl;
+          ans.push_back(value);
+        }
+      }
+    }
+  }
+  return ans;
+}
 
 // (Done)TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
