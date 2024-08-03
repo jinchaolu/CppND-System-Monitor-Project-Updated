@@ -51,6 +51,13 @@ long ActiveJiffies(int pid);
 long IdleJiffies(vector<string> cpuTime);
 
 // Processes
+enum ProcessStates {
+  kUtime_ = 13, // CPU time spent in user code, measured in clock ticks
+  kStime_, // CPU time spent in kernel code, measured in clock ticks
+  kCutime_, // Waited-for children's CPU time spent in user code (in clock ticks)
+  kCstime_, // Waited-for children's CPU time spent in kernel code (in clock ticks)
+  kStarttime_ = 21, // Time when the process started, measured in clock ticks
+};
 std::vector<std::string> CpuUtilization(int pid);
 std::string Command(int pid);
 std::string Ram(int pid);

@@ -19,7 +19,7 @@ string Format::ElapsedTime(long seconds) {
 //   std::cout << "mm: " << sMinute << std::endl;
   seconds /= 60;
   int hh = seconds;
-  string sHour = ((mm < 10) ? ("0" + std::to_string(hh)) : (std::to_string(hh)));
+  string sHour = ((hh < 10) ? ("0" + std::to_string(hh)) : (std::to_string(hh)));
 //   std::cout << "hh: " << sHour << std::endl;
   return (sHour + ":" + sMinute + ":" + sSecond);
 }
