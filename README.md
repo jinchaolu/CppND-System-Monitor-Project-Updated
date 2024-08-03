@@ -39,3 +39,31 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 5. Implement the `System`, `Process`, and `Processor` classes, as well as functions within the `LinuxParser` namespace.
 
 6. Submit!
+
+## Project Rubric  
+### 1. Basic Requirements
+#### 1.1 The student will be able to organize code in a project structure.
+Yes, he is.
+#### 1.2 The student will be able to write warning-free code.
+Yes, he is.
+#### 1.3 The student will be able to create a working project.
+Yes, he is.
+#### 1.4 The student will be able to organize code using object oriented programming principles.
+Yes, he is.
+### 2. System Requirements
+#### 2.1 The student will be able to extract and display basic data about the system.
+Yes, he is.
+#### 2.2 The student will be able to use composition.
+Yes, he is.
+### 3. Processor Requirements
+#### 3.1 The student will be able to read and display data about the CPU.
+Yes, he is.
+### 4. Process Requirements
+#### 4.1 The student will be able to read and display the processes on the system.
+Yes, he is.
+#### 4.2 The student will be able to display data about individual processes.
+Yes, he is.
+
+## Photos
+### 1. Example
+![System_Monitor_Project_Example.png](photos/System_Monitor_Project_Example.png)
